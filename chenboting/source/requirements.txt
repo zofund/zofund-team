@@ -1,0 +1,10 @@
+torch==1.5.0+cu101
+tensorflow_gpu==1.15.0
+transformers==2.11.0
+numpy==1.18.5
+tqdm==4.46.1
+pandas==1.0.4
+psycopg2==2.8.5
+scikit_learn==0.23.1
+source==1.2.0
+tensorflow==2.2.0
