@@ -6,7 +6,7 @@ import gensim
 import numpy as np
 
 
-data = pd.read_csv(r'report.csv', encoding='gb18030').iloc[0:50000, :]
+data = pd.read_csv(r'report.csv', encoding='gb18030')
 data['report_summary'] = data['report_summary'].map(lambda i: re.sub('<AI(.*?)>', '', i))
 data['report_summary'] = data['report_summary'].map(lambda i: re.sub('</AI>', '', i))
 
