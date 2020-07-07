@@ -20,13 +20,13 @@ print('下载完毕模型')
 
 # 加载特定词词典
 jieba.load_userdict('userdict.txt')
-import OpenHowNet
 
+import OpenHowNet
 print('引入hownet')
 hownet_dict = OpenHowNet.HowNetDict()
+print('引入hownet计算相似度')
 hownet_dict.initialize_sememe_similarity_calculation()
-
-
+print('引入完毕')
 def word_score_max(word_list,word):
     # 计算一个词与一个词组里面的相似度(基于word2vec)，并返回相似度的最大的词和相似度得分
     # 通过'word'索引到单词，通过'score'索引到得分
