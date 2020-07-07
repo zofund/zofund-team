@@ -1,2 +1,3 @@
 .idea
-chenboting/data
+/chenboting/data/*
+/__pycache__/

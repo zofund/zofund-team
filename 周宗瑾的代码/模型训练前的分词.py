@@ -8,4 +8,3 @@ data['split_word'] = data['report_summary'].map(lambda i: re.sub(r"[0-9\s+\.\!\/
 data['split_word'] = data['split_word'].apply(lambda i: ' '.join(jieba.cut(i)))
 print(data['split_word'])
 data['split_word'].to_csv('word_split.txt',encoding='utf-8',index=None)
-
