@@ -261,7 +261,7 @@ class HowNetModel:
         LOGGER.info('引入完毕')
         return hownet_dict
 
-    def word_score_max(self, word_list, word):
+    def word_score_max(self, word_list, compare_word_list):
         """
         计算一个词与一个词组里面的相似度(基于word2vec)，并返回相似度的最大的词和相似度得分
         通过'word'索引到单词，通过'score'索引到得分
@@ -269,20 +269,23 @@ class HowNetModel:
         :param word:
         :return:
         """
-        word_score_dict = {}
-        for i in word_list:
-            try:
-                c = self.model[i]
-                score = self.model.similarity(word, i)
-                word_score_dict[i] = score
-            except KeyError:
-                c = 0
-        if word_score_dict == {}:
-            return {'word': 0, 'score': 0}
-        else:
-            max_word = max(word_score_dict, key=word_score_dict.get)
-            dict_ = {'word': max_word, 'score': word_score_dict[max_word]}
-            return dict_
+        compare = []
+        for word in compare_word_list:
+            word_score_dict = {}
+            for i in word_list:
+                try:
+                    c = self.model[i]
+                    score = self.model.similarity(word, i)
+                    word_score_dict[i] = score
+                except KeyError:
+                    c = 0
+            if word_score_dict == {}:
+                return {'word': 0, 'score': 0}
+            else:
+                max_word = max(word_score_dict, key=word_score_dict.get)
+                dict_ = {'word': max_word, 'score': word_score_dict[max_word]}
+            compare.append(dict_['score'])
+        return np.max(compare)
 
     def word_score_v(self, word_list, word_compare_list):
         """
@@ -472,11 +475,11 @@ class HowNetModel:
             score_grade = {}
             # 定位句子
 
-            achievement_sentence = self.word_location(sentenses, '业绩')
-            degree_of_boom_sentence = self.word_location(sentenses, '行业景气度')
-            market_share_sentence = self.word_location(sentenses, '市场占有率')
-            price_sentence = self.word_location(sentenses, '产品价格')
-            transformation_sentence = self.word_location(sentenses, '转型')
+            achievement_sentence = self.word_location(sentenses, ['业绩'])
+            degree_of_boom_sentence = self.word_location(sentenses, ['行业景气度','量价','产业','行业'])
+            market_share_sentence = self.word_location(sentenses, ['市场占有率','体量','规模','集中度','市占率','市场份额','占率'])
+            price_sentence = self.word_location(sentenses, ['产品价格','价格','批价','出厂价','量价'])
+            transformation_sentence = self.word_location(sentenses, ['转型','转变'])
 
             print('--------')
             print(i)
