@@ -171,7 +171,7 @@ class SOPMIModel:
         # 去除长度为1的单词
         for word_list in all_word_list:
             word_list_after_stopwords = [w for w in word_list if w not in stopwords and len(w) > 1]
-        all_word_list_after_stopwords.append(word_list_after_stopwords)
+            all_word_list_after_stopwords.append(word_list_after_stopwords)
         all_doc_list_after_stopwords = [" ".join(word_list_after_stopwords) for word_list_after_stopwords in
                                         all_word_list_after_stopwords]
 
@@ -286,7 +286,7 @@ class HowNetModel:
 
     def word_score_v(self, word_list, word_compare_list):
         """
-        计算单句动词获其他词性与褒贬程度词的相似性（基于hownet）
+        计算单句动词或其他词性与褒贬程度词的相似性（基于hownet）
         返回相似度
         :param word_list:
         :param word_compare_list:
