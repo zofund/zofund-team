@@ -5,3 +5,5 @@
 # @Site    : 
 # @File    : __init__.py
 # @Software: PyCharm
+
+from src.Utils.Logging import LOGGER

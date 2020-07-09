@@ -266,7 +266,7 @@ class HowNetModel:
         计算一个词与一个词组里面的相似度(基于word2vec)，并返回相似度的最大的词和相似度得分
         通过'word'索引到单词，通过'score'索引到得分
         :param word_list:
-        :param word:
+        :param compare_word_list:
         :return:
         """
         compare = []
@@ -303,7 +303,8 @@ class HowNetModel:
                     score = self.hownet_dict.calculate_word_similarity(i, k)
                     word_score_dict[i] = score
                 except KeyError:
-                    c = 0
+                    pass
+                    # c = 0
             if word_score_dict == {}:
                 dict_ = {'word': 0, 'score': 0}
             else:

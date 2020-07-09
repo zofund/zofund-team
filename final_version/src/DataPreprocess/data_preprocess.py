@@ -49,5 +49,5 @@ if __name__ == '__main__':
     data = pd.read_csv(os.path.join(INPUT_PATH, 'raw_data.csv'))
     print('原始数据有{}条'.format(len(data)))
     data = DataPreprocessor.df_cleaning(data)
-    data.to_csv(os.pth.join(INPUT_PATH, 'clean_data.csv'), encoding='utf-8-sig', index=False)
+    data.to_csv(os.path.join(INPUT_PATH, 'clean_data.csv'), encoding='utf-8-sig', index=False)
     print('处理后的数据有{}条'.format(len(data)))
