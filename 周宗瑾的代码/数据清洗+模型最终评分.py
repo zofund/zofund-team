@@ -6,7 +6,7 @@ import gensim
 import numpy as np
 
 
-data = pd.read_csv(r'report.csv', encoding='gb18030')
+data = pd.read_csv(r'report.csv', encoding='gb18030').iloc[:10000,:]
 data['report_summary'] = data['report_summary'].map(lambda i: re.sub('<AI(.*?)>', '', i))
 data['report_summary'] = data['report_summary'].map(lambda i: re.sub('</AI>', '', i))
 
@@ -161,7 +161,7 @@ def score(sentence,special_word,degree):
         all_list = specific_sentence(sentence)['all_list']
 
         # 把评分分为三档，好，中，坏，好为1分
-        score_good = word_score_v(v_list+ n_list + adj_list,['提高','高','增加','好','成功','上涨','超','增量'])
+        score_good = word_score_v(v_list+ n_list + adj_list,['提高','高','增加','好','成功','上涨','超','增量','高于','超'])
         score_mediem = word_score_v(all_list, ['稳健','持续','维持','稳定','保持','符合'])
         score_bad = word_score_v(v_list + n_list + adj_list, ['降低','低','低于','减弱','坏','失败',])
 
@@ -209,26 +209,31 @@ def main():
         price_sentence = word_location(sentenses,'产品价格')
         transformation_sentence = word_location(sentenses,'转型')
 
-        print('--------')
+        print('**************************************')
         print(i)
         # 情感打分
         achievement.append(score(achievement_sentence,'业绩',0.7))
+        print('---------------')
         degree_of_boom.append(score(price_sentence,'价格',0.65))
+        print('---------------')
         market_share.append(score(degree_of_boom_sentence,'行业景气度',0.6))
+        print('---------------')
         price.append(score(market_share_sentence,'市场占有率',0.6))
+        print('---------------')
         transformation.append(score(transformation_sentence,'转型',0.6))
+        print('---------------')
         print('\n')
         # 把最接近归因的句子按词性分割
         i = i + 1
 
 
-    data['业绩'] = achievement
-    data['产品价格'] = degree_of_boom
-    data['行业景气度'] = market_share
-    data['市场占有率'] = price
-    data['转型'] = transformation
-    data['总分'] = data['业绩'] + data['产品价格'] + data['行业景气度'] + data['市场占有率'] + data['转型'] + 5
-    data['总分'].hist(range=[0,10])
-    data.to_csv(r'report_score.csv',encoding='gb18030')
+    # data['业绩'] = achievement
+    # data['产品价格'] = degree_of_boom
+    # data['行业景气度'] = market_share
+    # data['市场占有率'] = price
+    # data['转型'] = transformation
+    # data['总分'] = data['业绩'] + data['产品价格'] + data['行业景气度'] + data['市场占有率'] + data['转型'] + 5
+    # data['总分'].hist(range=[0,10])
+    # data.to_csv(r'report_score.csv',encoding='gb18030')
 
 main()

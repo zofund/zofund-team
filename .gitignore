@@ -5,4 +5,9 @@
 /final_version/data/input/*.csv
 /final_version/data/logging/*.log
 /final_version/data/saved_model/*.npy
+/周宗瑾的代码/*.csv
+/周宗瑾的代码/*.npy
+/周宗瑾的代码/*.txt
+/周宗瑾的代码/*.bin
+
 
