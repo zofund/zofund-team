@@ -509,7 +509,3 @@ if __name__ == '__main__':
     else:
         m02 = HowNetModel()
         m02.run()
-
-
-
-

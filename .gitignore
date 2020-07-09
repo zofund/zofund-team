@@ -4,6 +4,5 @@
 /final_version/data/input/*.txt
 /final_version/data/input/*.csv
 /final_version/data/logging/*.log
-/final_version/data/saved_model/*.bin
 /final_version/data/saved_model/*.npy
 
