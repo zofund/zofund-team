@@ -513,6 +513,11 @@ if __name__ == '__main__':
         m02 = HowNetModel()
         m02.run()
 
-
-
+    try:
+        df1 = pd.read_csv(os.path.join(OUTPUT_PATH, 'sopmi_result.csv'))
+        df2 = pd.read_csv('report_score.csv', encoding='utf-8-sig')
+        df1['最终得分'] = df2.iloc[:,1]
+        df1.to_csv('report_score.csv', encoding='utf-8-sig')
+    except:
+        print('缺一张表，无法合并')
 
