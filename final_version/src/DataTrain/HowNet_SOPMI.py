@@ -476,11 +476,13 @@ class HowNetModel:
             score_grade = {}
             # 定位句子
 
-            achievement_sentence = self.word_location(sentenses, ['业绩'])
-            degree_of_boom_sentence = self.word_location(sentenses, ['行业景气度','量价','产业','行业'])
-            market_share_sentence = self.word_location(sentenses, ['市场占有率','体量','规模','集中度','市占率','市场份额','占率'])
-            price_sentence = self.word_location(sentenses, ['产品价格','价格','批价','出厂价','量价'])
-            transformation_sentence = self.word_location(sentenses, ['转型','转变'])
+            achievement_sentence = self.word_location(sentenses, ['业绩','亮眼','靓丽','超额完成'])
+            degree_of_boom_sentence = self.word_location(sentenses, ['行业景气度','量价','产业','行业','景气',])
+            market_share_sentence = self.word_location(sentenses, ['市场占有率','体量','规模','集中度','市占率',
+                                                                   '市场份额','占率','渗透率','扩张','拓展','拓张',
+                                                                   '扩展','并购','收购','开拓市场',''])
+            price_sentence = self.word_location(sentenses, ['产品价格','价格','批价','出厂价','量价','涨价','提价'])
+            transformation_sentence = self.word_location(sentenses, ['转型','转变','转型期','变革','外延','重组','整合'])
 
             print('--------')
             print(i)
@@ -513,3 +515,12 @@ if __name__ == '__main__':
     else:
         m02 = HowNetModel()
         m02.run()
+
+    try:
+        df1 = pd.read_csv(os.path.join(OUTPUT_PATH, 'sopmi_result.csv'))
+        df2 = pd.read_csv('report_score.csv', encoding='utf-8-sig')
+        df1['最终得分'] = df2.iloc[:,1]
+        df1.to_csv('report_score.csv', encoding='utf-8-sig')
+    except:
+        print('缺一张表，无法合并')
+
